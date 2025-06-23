@@ -42,25 +42,30 @@ describe("Testes no componente TigrinhoGame", () => {
     });
   });
 
-  test("Mostra mensagem de tentativa quando o jogador perde", async () => {
-    const root = ReactDOM.createRoot(container);
+test("Mostra mensagem de tentativa quando o jogador perde (mockando resultado errado)", async () => {
+  const root = ReactDOM.createRoot(container);
 
-    await act(async () => {
-      root.render(<TigrinhoGames />);
-    });
+  // Mock para forçar símbolos diferentes
+  const mockRandom = vi.spyOn(Math, "random").mockImplementationOnce(() => 0)   // 🐯
+    .mockImplementationOnce(() => 0.2)                                           // 🍒
+    .mockImplementationOnce(() => 0.6);                                          // 🔔
 
-    const botao = container.querySelector("button");
-
-    await act(async () => {
-      botao.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
-
-    const mensagem = container.querySelector("h2");
-    expect(
-      mensagem.textContent === "🎉 Parabéns! Você ganhou! 🎉" ||
-      mensagem.textContent === "😢 Tente novamente!"
-    ).toBe(true);
+  await act(async () => {
+    root.render(<TigrinhoGames />);
   });
+
+  const botao = container.querySelector("button");
+
+  await act(async () => {
+    botao.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
+
+  const mensagem = container.querySelector("h2");
+  expect(mensagem.textContent).toBe("😢 Tente novamente!");
+
+  // Limpar mock para não afetar outros testes
+  mockRandom.mockRestore();
+});
 
   test("Mock: Força o jogador a ganhar com 3 símbolos iguais", async () => {
     const root = ReactDOM.createRoot(container);
