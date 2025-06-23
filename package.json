@@ -1,0 +1,40 @@
+{
+  "name": "multi-app-react",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react-scripts": "5.0.1",
+    "@vitest/coverage-v8": "^3.2.3",
+    "axios": "^1.7.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "vite": "^5.4.8",
+    "vitest": "^3.2.3",
+    "@vitejs/plugin-react": "^4.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start:contador": "react-scripts start contador.jsx",
+    "test:contador": "react-scripts test __tests__/Contador.test.jsx",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
